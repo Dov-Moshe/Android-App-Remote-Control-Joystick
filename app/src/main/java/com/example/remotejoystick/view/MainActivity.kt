@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModel()
 
-        val layout: LinearLayout = findViewById(R.id.main_layout)
+        val layout: LinearLayout = findViewById(R.id.joystick)
         joystick = Joystick(this)
         layout.addView(joystick)
 
