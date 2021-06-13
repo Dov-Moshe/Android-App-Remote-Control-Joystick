@@ -55,8 +55,8 @@ class Joystick @JvmOverloads constructor(
             var mousePointX : Float = ((circleX - spaceWidth).toFloat())
             var mousePointY : Float = ((circleY - spaceHeight).toFloat())
 
-            mousePointX = (mousePointX - radiusOutsideCircle) / radiusOutsideCircle
-            mousePointY = (-1)*(mousePointY - radiusOutsideCircle) / radiusOutsideCircle
+            mousePointX =  (radiusOutsideCircle - mousePointX) / radiusOutsideCircle
+            mousePointY = (radiusOutsideCircle - mousePointY) / radiusOutsideCircle
 
             /*if (mousePointX == radiusOutsideCircle.toFloat())
                 mousePointX = 0f
