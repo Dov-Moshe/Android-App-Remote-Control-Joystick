@@ -52,17 +52,15 @@
 
         <TextView
             android:id="@+id/tvXmouse"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asd"
-            android:textSize="18dp"/>
-
+            android:layout_marginEnd="20dp"
+            android:text="asd" />
         <TextView
             android:id="@+id/tvYmouse"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="asd"
-            android:textSize="18dp"/>
+            android:text="asd" />
 
 
         <LinearLayout
@@ -71,11 +69,25 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp">
 
+            <TextView
+                android:id="@+id/throttle_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="throttle"
+                android:textAlignment="center"
+                android:textSize="18dp" />
             <SeekBar
                 android:id="@+id/throttle_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="1000" />
+            <TextView
+                android:id="@+id/rudder_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="rudder"
+                android:textAlignment="center"
+                android:textSize="18dp" />
             <SeekBar
                 android:id="@+id/rudder_bar"
                 android:layout_width="match_parent"

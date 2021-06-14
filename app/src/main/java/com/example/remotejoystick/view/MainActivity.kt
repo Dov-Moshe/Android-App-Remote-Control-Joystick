@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     fun MouseCoordinate(x: Float, y: Float) {
         viewModel.setJoystickProgress(x,y)
 
-        mouseX!!.text = "mouse x coordinate is - ($x)"
-        mosueY!!.text = "mouse y coordinate is - ($y)"
+        mouseX!!.text = "x coordinate is - ($x)"
+        mosueY!!.text = "y coordinate is - ($y)"
     }
 }
