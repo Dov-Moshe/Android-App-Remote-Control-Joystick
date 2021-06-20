@@ -11,16 +11,13 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.stream.Stream
 
-class Model(activity: MainActivity) : IModel{
+class Model() : IModel{
 
     lateinit var socket : Socket
     lateinit var stream : DataOutputStream
-    var executor : ExecutorService
-    var activity : MainActivity
+    var executor : ExecutorService = Executors.newFixedThreadPool(1)
 
     init {
-        this.executor = Executors.newFixedThreadPool(1)
-        this.activity = activity
 
 
         /*try {
@@ -46,9 +43,9 @@ class Model(activity: MainActivity) : IModel{
         try {
             socket = Socket(ip,port)
             stream = DataOutputStream(socket.getOutputStream())
-            Toast.makeText(activity, "Connecting to server!", Toast.LENGTH_SHORT).show()
+            Log.d("", "Connecting to server!")
         } catch (e : Exception) {
-            Toast.makeText(activity, "Cannot connect to server!", Toast.LENGTH_SHORT).show()
+            Log.d("", "Cannot connect to server!")
         }
 
 

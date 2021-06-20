@@ -1,8 +1,12 @@
 package com.example.remotejoystick.view
 
+import android.app.ActionBar
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.databinding.DataBindingUtil
 import com.example.remotejoystick.R
@@ -15,77 +19,48 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: ViewModel
     lateinit var joystick : Joystick
 
-    private var mouseX: TextView? = null
-    private var mosueY: TextView? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        viewModel = ViewModel(this)
+        viewModel = ViewModel()
         binding.viewModel = viewModel
 
         val layout: LinearLayout = findViewById(R.id.joystick)
         joystick = Joystick(this)
         layout.addView(joystick)
 
-
         findViewById<Button>(R.id.button_connect).setOnClickListener {
             try {
                 val ip = findViewById<EditText>(R.id.ip_flight_gear)
                 val port = findViewById<EditText>(R.id.port_flight_gear)
-                binding.buttonConnect.text = "connecting..."
+
+                //binding.buttonConnect.text = "connecting..."
                 viewModel.connect(ip.text.toString(), port.text.toString().toInt())
             } catch (e: Exception) {
                 Toast.makeText(this, "Connection failed!", Toast.LENGTH_SHORT).show()
             }
         }
 
-        /*val rudder = findViewById<SeekBar>(R.id.rudder_bar)
-        rudder?.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
-                try {
-                    viewModel.setSeekbarProgress(progress, "rudder")
-                } catch (e : Exception) {
-
-                }
-
-            }
-            override fun onStartTrackingTouch(seek: SeekBar) {
-                // write custom code for progress is started
-            }
-            override fun onStopTrackingTouch(seek: SeekBar) {
-                // write custom code for progress is stopped
-            }
-        })
-
-        val throttle = findViewById<SeekBar>(R.id.throttle_bar)
-        throttle?.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
-                try {
-                    viewModel.setSeekbarProgress(progress, "throttle")
-                } catch (e : Exception) {
-
-                }
-            }
-            override fun onStartTrackingTouch(seek: SeekBar) {
-                // write custom code for progress is started
-            }
-            override fun onStopTrackingTouch(seek: SeekBar) {
-                // write custom code for progress is stopped
-            }
-        })*/
-
-        mouseX = findViewById(R.id.tvXmouse)
-        mosueY = findViewById(R.id.tvYmouse)
-
+        binding.portFlightGear.setOnClickListener {
+            hideKeyboard()
+        }
     }
 
+    /*override fun onResume() {
+        super.onResume()
+        binding.throttleBar.layoutParams =
+            ActionBar.LayoutParams(binding.frameLayout.height, ActionBar.LayoutParams.MATCH_PARENT)
+    }*/
     fun MouseCoordinate(x: Float, y: Float) {
         viewModel.setJoystickProgress(x,y)
+    }
 
-        mouseX!!.text = "x coordinate is - ($x)"
-        mosueY!!.text = "y coordinate is - ($y)"
+    fun hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val hide = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            hide.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 }
