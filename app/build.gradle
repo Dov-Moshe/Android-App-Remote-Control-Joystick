@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'org.jetbrains.kotlin.kapt'
 }
 
 android {
@@ -31,9 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dataBinding {
-        //noinspection DataBindingWithoutKapt
-        enabled = true
+
+    buildFeatures {
+        dataBinding = true
     }
 }
 

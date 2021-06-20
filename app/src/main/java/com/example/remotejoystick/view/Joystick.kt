@@ -1,9 +1,8 @@
 package com.example.remotejoystick.view
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -14,13 +13,24 @@ enum class WindowSize(val value: Int) {
     HEIGHT(0), WIDTH(0)
 }
 
+enum class HalfWindowSize(var value: Float) {
+    HEIGHT(0f), WIDTH(0f)
+}
+
 class Joystick @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply{
+    private val paintBigCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply{
+        color = Color.rgb(41, 171, 226)
+        style = Paint.Style.STROKE
+        strokeWidth = 5.toFloat()
+    }
+
+    private val paintSmallCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply{
+        //color = Color.rgb(34, 181, 115)
         style = Paint.Style.FILL
     }
 
@@ -29,8 +39,10 @@ class Joystick @JvmOverloads constructor(
     private var circleX = 0
     private var circleY = 0
     //private var myMain: MainActivity? = context as MainActivity
-    private var radiusOutsideCircle : Int = 300
-    private var radius : Int = 100
+    private var bigCircleOutsideRadius : Float = 0f
+    private var bigCircleMidRadius : Float = 0f
+    private var bigCircleInsideRadius : Float = 0f
+    private var radius : Float = 0f
     private var spaceWidth :Int = 0
     private var spaceHeight : Int = 0
 
@@ -39,52 +51,20 @@ class Joystick @JvmOverloads constructor(
     ///exit- if the game didn't have thread that running right now the function will try to create one
     override fun onTouchEvent(event: MotionEvent): Boolean {
         super.onTouchEvent(event)
-        /*Log.d("find Problem", WindowSize.WIDTH.value.toString() + " " + WindowSize.HEIGHT.value.toString())*/
 
         ///if its not the first turn
         clickCircle = 300.toDouble().pow(2.0) >=
-            (event.x.toInt()-width/2).toDouble().pow(2.0)+(event.y.toInt()-height/2).toDouble().pow(2.0)
+                (event.x.toInt()-width/2).toDouble().pow(2.0)+(event.y.toInt()-height/2).toDouble().pow(2.0)
         if (clickCircle) {
             circleX = event.x.toInt()
             circleY = event.y.toInt()
 
-            //Log.d("", "height: " + height.toString() + ", width: " + width.toString())
-            //Log.d("", "spaceHeight: " + spaceHeight.toString() + ", spaceWidth: " + spaceWidth.toString())
-            //Log.d("", "circleX: " + circleX.toString() + ", circleY: " + circleY.toString())
-
             var mousePointX : Float = ((circleX - spaceWidth).toFloat())
             var mousePointY : Float = ((circleY - spaceHeight).toFloat())
 
-            mousePointX =  (radiusOutsideCircle - mousePointX) / radiusOutsideCircle
-            mousePointY = (radiusOutsideCircle - mousePointY) / radiusOutsideCircle
+            mousePointX =  (-1)*(bigCircleOutsideRadius - mousePointX) / bigCircleOutsideRadius
+            mousePointY = (bigCircleOutsideRadius - mousePointY) / bigCircleOutsideRadius
 
-            /*if (mousePointX == radiusOutsideCircle.toFloat())
-                mousePointX = 0f
-            else if (mousePointX < radiusOutsideCircle)
-                mousePointX = (-1)*((mousePointX / radiusOutsideCircle))
-            else
-                mousePointX = (1 - (mousePointX / radiusOutsideCircle))
-
-
-            if (mousePointY == radiusOutsideCircle.toFloat())
-                mousePointY = 0f
-            else if (mousePointY > radiusOutsideCircle)
-                mousePointY = (-1)*(1 - (mousePointY / radiusOutsideCircle))
-            else
-                mousePointY = (1 - (mousePointY / radiusOutsideCircle))*/
-
-            //Log.d("", "mousePointX: " + mousePointX.toString() + ", mousePointY: " + mousePointY.toString())
-
-            /*if(mousePointX > 1)
-                mousePointX = 1.0;
-            if(mousePointX < -1)
-                mousePointX = (-1).toDouble();
-            mousePointY = ((circleY - spaceHeight).toDouble()/radiusOutsideCircle.toDouble())
-            if(mousePointY > 1)
-                mousePointY = 1.0;
-            if(mousePointY < -1)
-                mousePointY = (-1).toDouble();*/
-            //Log.d("find Problem", mousePointX.toString() + " " + mousePointY.toString())
             (context as MainActivity).MouseCoordinate(mousePointX, mousePointY)
         }
 
@@ -92,29 +72,38 @@ class Joystick @JvmOverloads constructor(
         return true
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        if(isStart) {
+            isStart = false
+            circleX = width / 2
+            circleY = height / 2
+
+            bigCircleOutsideRadius = width.toFloat() / 3
+            bigCircleMidRadius = bigCircleOutsideRadius - 10
+            bigCircleInsideRadius = bigCircleOutsideRadius - 20
+            radius = bigCircleOutsideRadius / 2
+
+            HalfWindowSize.WIDTH.value = width.toFloat() / 2
+            HalfWindowSize.HEIGHT.value = height.toFloat() / 2
+            spaceWidth = (width - bigCircleOutsideRadius.toInt() * 2) / 2
+            spaceHeight = (height - bigCircleOutsideRadius.toInt() * 2) / 2
+        }
+
+        val gradient = RadialGradient(circleX.toFloat(),circleY.toFloat(), radius, Color.rgb(34, 181, 115), Color.rgb(0, 143, 77), Shader.TileMode.MIRROR)
+        paintSmallCircle.setShader(gradient)
+
         canvas.apply {
 
-            if(isStart) {
-                isStart = false
-                circleX = width / 2
-                circleY = height / 2
-                spaceWidth = (width - radiusOutsideCircle * 2) / 2
-                spaceHeight = (height - radiusOutsideCircle * 2) / 2
-            }
+            //draw big circle
+            drawCircle(HalfWindowSize.WIDTH.value, HalfWindowSize.HEIGHT.value, bigCircleOutsideRadius, paintBigCircle)
+            drawCircle(HalfWindowSize.WIDTH.value, HalfWindowSize.HEIGHT.value, bigCircleMidRadius, paintBigCircle)
+            drawCircle(HalfWindowSize.WIDTH.value, HalfWindowSize.HEIGHT.value, bigCircleInsideRadius, paintBigCircle)
 
-            paint.color = Color.RED
-            paint.style = Paint.Style.STROKE
-            paint.strokeWidth = 5.toFloat()
-            drawCircle(width.toFloat() / 2, height.toFloat() / 2, radiusOutsideCircle.toFloat(), paint)
-
-            paint.color = Color.BLACK
-            paint.style = Paint.Style.FILL
-
-            ///draw circle
-            drawCircle(circleX.toFloat(), circleY.toFloat(), radius.toFloat(), paint) ///draw the circle
+            //draw small circle
+            drawCircle(circleX.toFloat(), circleY.toFloat(), radius, paintSmallCircle) ///draw the circle
         }
     }
 
