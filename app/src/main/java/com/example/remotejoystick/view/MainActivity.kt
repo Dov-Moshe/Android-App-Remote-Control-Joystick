@@ -29,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         joystick = Joystick(this)
         layout.addView(joystick)
 
+        joystick.joystickService = object : JoystickService {
+            override fun Coordinates(x: Float, y: Float) {
+                viewModel.setJoystickProgress(x, y)
+            }
+        }
+
         findViewById<Button>(R.id.button_connect).setOnClickListener {
             try {
                 val ip = findViewById<EditText>(R.id.ip_flight_gear)
@@ -51,11 +57,8 @@ class MainActivity : AppCompatActivity() {
         binding.throttleBar.layoutParams =
             ActionBar.LayoutParams(binding.frameLayout.height, ActionBar.LayoutParams.MATCH_PARENT)
     }*/
-    fun MouseCoordinate(x: Float, y: Float) {
-        viewModel.setJoystickProgress(x,y)
-    }
 
-    fun hideKeyboard() {
+    private fun hideKeyboard() {
         val view = this.currentFocus
         if (view != null) {
             val hide = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

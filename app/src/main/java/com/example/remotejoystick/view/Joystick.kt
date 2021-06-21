@@ -46,6 +46,7 @@ class Joystick @JvmOverloads constructor(
     private var spaceWidth :Int = 0
     private var spaceHeight : Int = 0
 
+    lateinit var joystickService : JoystickService
 
     ///enter - if the player click at the screen
     ///exit- if the game didn't have thread that running right now the function will try to create one
@@ -65,7 +66,7 @@ class Joystick @JvmOverloads constructor(
             mousePointX =  (-1)*(bigCircleOutsideRadius - mousePointX) / bigCircleOutsideRadius
             mousePointY = (bigCircleOutsideRadius - mousePointY) / bigCircleOutsideRadius
 
-            (context as MainActivity).MouseCoordinate(mousePointX, mousePointY)
+            joystickService.Coordinates(mousePointX, mousePointY)
         }
 
         invalidate()
