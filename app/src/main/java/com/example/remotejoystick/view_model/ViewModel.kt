@@ -17,13 +17,14 @@ class ViewModel {
         model.changeThrottle(realVal)
     }
 
-
     fun connect(ip : String, port : Int) {
         this.model.connectToServer(ip,port)
     }
 
-
-    fun setJoystickProgress(aileron : Float, elevator : Float) {
-        model.changeJoystick(aileron, elevator)
+    fun setAileron(x: Float) {
+        this.model.changeAileron(x)
+    }
+    fun setElevator(y: Float) {
+        this.model.changeElevator(y)
     }
 }

@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
         joystick.joystickService = object : JoystickService {
             override fun Coordinates(x: Float, y: Float) {
-                viewModel.setJoystickProgress(x, y)
+                viewModel.setAileron(x)
+                viewModel.setElevator(y)
             }
         }
 

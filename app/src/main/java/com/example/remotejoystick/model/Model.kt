@@ -48,11 +48,20 @@ class Model {
         }
     }
 
-    fun changeJoystick(newValFirst: Float, newValSecond: Float) {
+    fun changeAileron(newVal: Float) {
         executor.execute {
             try {
-                stream.writeBytes(aileron + newValFirst + "\r\n")
-                stream.writeBytes(elevator + newValSecond + "\r\n")
+                stream.writeBytes(aileron + newVal + "\r\n")
+                stream.flush()
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    fun changeElevator(newVal: Float) {
+        executor.execute {
+            try {
+                stream.writeBytes(elevator + newVal + "\r\n")
                 stream.flush()
             } catch (e: Exception) {
             }
