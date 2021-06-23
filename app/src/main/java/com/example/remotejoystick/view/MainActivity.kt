@@ -2,12 +2,14 @@ package com.example.remotejoystick.view
 
 import android.app.ActionBar
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.example.remotejoystick.R
 import com.example.remotejoystick.databinding.ActivityMainBinding
