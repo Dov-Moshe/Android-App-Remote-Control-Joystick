@@ -4,14 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import kotlin.math.pow
-
-enum class WindowSize(val value: Int) {
-    HEIGHT(0), WIDTH(0)
-}
 
 enum class HalfWindowSize(var value: Float) {
     HEIGHT(0f), WIDTH(0f)
@@ -30,7 +25,6 @@ class Joystick @JvmOverloads constructor(
     }
 
     private val paintSmallCircle = Paint(Paint.ANTI_ALIAS_FLAG).apply{
-        //color = Color.rgb(34, 181, 115)
         style = Paint.Style.FILL
     }
 
@@ -94,7 +88,7 @@ class Joystick @JvmOverloads constructor(
         }
 
         val gradient = RadialGradient(circleX.toFloat(),circleY.toFloat(), radius, Color.rgb(34, 181, 115), Color.rgb(0, 143, 77), Shader.TileMode.MIRROR)
-        paintSmallCircle.setShader(gradient)
+        paintSmallCircle.shader = gradient
 
         canvas.apply {
 

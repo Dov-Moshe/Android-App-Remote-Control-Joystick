@@ -1,18 +1,10 @@
 package com.example.remotejoystick.model
 
-import android.os.Build
-import android.os.StrictMode
-import android.util.Log
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import com.example.remotejoystick.view.MainActivity
 import java.io.DataOutputStream
 import java.lang.Exception
 import java.net.Socket
-import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.stream.Stream
 
 class Model {
 
@@ -25,7 +17,6 @@ class Model {
     var aileron = "set /controls/flight/aileron "
     var elevator = "set /controls/flight/elevator "
 
-
     fun connectToServer(ip : String, port : Int) {
 
         try {
@@ -33,16 +24,9 @@ class Model {
                 socket = Socket(ip, port)
                 stream = DataOutputStream(socket.getOutputStream())
             }.start()
-            /*CompletableFuture.supplyAsync {
-                socket = Socket(ip, port)
-                stream = DataOutputStream(socket.getOutputStream())
-            }*/
         } catch (e : Exception) {
-            Log.d("", "Cannot connect to server!")
         }
     }
-
-
 
     fun changeRudder(newVal: Float) {
         executor.execute {

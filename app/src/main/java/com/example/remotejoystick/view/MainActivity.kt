@@ -1,15 +1,11 @@
 package com.example.remotejoystick.view
 
-import android.app.ActionBar
 import android.content.Context
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.example.remotejoystick.R
 import com.example.remotejoystick.databinding.ActivityMainBinding
@@ -41,8 +37,6 @@ class MainActivity : AppCompatActivity() {
             try {
                 val ip = findViewById<EditText>(R.id.ip_flight_gear)
                 val port = findViewById<EditText>(R.id.port_flight_gear)
-
-                //binding.buttonConnect.text = "connecting..."
                 viewModel.connect(ip.text.toString(), port.text.toString().toInt())
             } catch (e: Exception) {
                 Toast.makeText(this, "Connection failed!", Toast.LENGTH_SHORT).show()
@@ -53,12 +47,6 @@ class MainActivity : AppCompatActivity() {
             hideKeyboard()
         }
     }
-
-    /*override fun onResume() {
-        super.onResume()
-        binding.throttleBar.layoutParams =
-            ActionBar.LayoutParams(binding.frameLayout.height, ActionBar.LayoutParams.MATCH_PARENT)
-    }*/
 
     private fun hideKeyboard() {
         val view = this.currentFocus

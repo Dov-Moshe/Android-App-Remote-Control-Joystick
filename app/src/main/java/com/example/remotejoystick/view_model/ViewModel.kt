@@ -1,16 +1,9 @@
 package com.example.remotejoystick.view_model
 
-import android.os.Build
-import android.util.Log
-import android.widget.SeekBar
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.databinding.BindingAdapter
-import com.example.remotejoystick.view.MainActivity
 import com.example.remotejoystick.model.Model
 import kotlin.properties.Delegates
 
-public class ViewModel() {
+class ViewModel {
 
     private var model : Model = Model()
 
@@ -33,5 +26,4 @@ public class ViewModel() {
     fun setJoystickProgress(aileron : Float, elevator : Float) {
         model.changeJoystick(aileron, elevator)
     }
-
 }
