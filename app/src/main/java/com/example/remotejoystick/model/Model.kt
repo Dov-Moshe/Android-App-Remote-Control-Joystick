@@ -18,13 +18,12 @@ class Model {
     var elevator = "set /controls/flight/elevator "
 
     fun connectToServer(ip : String, port : Int) {
-
-        try {
-            Thread {
+        executor.execute {
+            try {
                 socket = Socket(ip, port)
                 stream = DataOutputStream(socket.getOutputStream())
-            }.start()
-        } catch (e : Exception) {
+            } catch (e: Exception) {
+            }
         }
     }
 
