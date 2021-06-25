@@ -43,18 +43,5 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Connection failed!", Toast.LENGTH_SHORT).show()
             }
         }
-
-        binding.portFlightGear.setOnClickListener {
-            hideKeyboard()
-        }
-    }
-
-    private fun hideKeyboard() {
-        val view = this.currentFocus
-        if (view != null) {
-            val hide = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            hide.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 }
