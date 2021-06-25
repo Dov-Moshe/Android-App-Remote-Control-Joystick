@@ -9,7 +9,7 @@
 ## Necessary installations to work with the code:
 Android Studio.
 
-![remote_joystick](https://user-images.githubusercontent.com/72437425/123138312-8ac2c780-d45d-11eb-8bae-e29cc82c4966.png)
+![remoteJoystick](https://user-images.githubusercontent.com/72437425/123385748-9073f680-d59e-11eb-93d5-d910327c42db.png)
 
 ## UML:
 [UML diagram](documentation/UML.png)
