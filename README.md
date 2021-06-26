@@ -27,7 +27,7 @@ The application developed in Android Studio using Kotlin language.
 	- view
 		- file "MainActivity" – the programing side of the view.
 		- file "Joystick" - class that inherits from class 'View' and implements joystick.
-		- file "JoystickService" - interface to get the joystick's notification.
+		- file "JoystickService" - interface to get the joystick's notifications.
 2. res:
 	- layout
 		- file "activity_main.xml" - the XML of the view.
@@ -50,7 +50,7 @@ The application developed in Android Studio using Kotlin language.
 **In Android Studio:**
 
 4. Run the Aplication.
-5. There is two field to fill in the app:
+5. There are two fields to fill in the app:
 	- IP Address: when using in emulator then input the local network IP.
 	- Port: input the port that matched to the port that written in Simulator's settings.
 6. Click on the button `CONNECT`.
