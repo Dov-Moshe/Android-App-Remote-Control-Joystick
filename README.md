@@ -57,6 +57,8 @@ The application developed in Android Studio using Kotlin language.
 
 ## UML:
 
+![Untitled Workspace (1)](https://user-images.githubusercontent.com/72437425/123521664-babdd500-d6c0-11eb-9b50-38ad1d7f4e6f.png)
+
 
 ## Link to video for displaying the Architecture & demo:
 
