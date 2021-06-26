@@ -16,7 +16,7 @@ The app was designed with MVVM architecture.
 
 The application developed in Android Studio using Kotlin language.
 
-![remoteJoystick](https://user-images.githubusercontent.com/72437425/123385748-9073f680-d59e-11eb-93d5-d910327c42db.png)
+![remoteJoystick](https://user-images.githubusercontent.com/72437425/123521914-500d9900-d6c2-11eb-823e-591f796e078e.png)
 
 ## General structure of the folders:
 1. java/... /remotejoystick
