@@ -4,7 +4,7 @@
 
 ## About this Android Application:
 
-This application provides Remote Control Joystick for flying airplane in FlightGear sinmulator. The simulator is the server and the Android app is the client. By IP address and Port, the app connecting to the simulator and sending commands how to fly.
+This application provides Remote Control Joystick for flying aircraft in FlightGear Sinmulator. The simulator is the server and the Android app is the client. By IP address and Port, the app connecting to the simulator and sending commands how to fly.
 
 After the connecting the comunicatuion between them is by protocol of four commands. Commands to change the value of: Rudder, Throttle, Aileron and Elevator.
 
@@ -33,26 +33,29 @@ The application developed in Android Studio using Kotlin language.
 		- file "activity_main.xml" - the XML of the view.
 
 
-## Necessary installations to work with the code:
-1.	Android Studio, with API      .
-2.	Android emulator (can be download inside Android Studio).
+## Necessary installations:
+1. Android Studio with minimum Android API 22.
+2. FlightGear Simulator.
+3. Android emulator (can be download inside Android Studio).
 
 ## Using instructions in Android Studio:
-1. Clone the project from GitHub and open the project with Android Studio.
+**In FlightGear Simulator:**
+1. Clone the project and open it with Android Studio.
 2. Copy the line below and paste it into the FlightGear Simulator's settings in 'additional settings' section:
 ```
 --telnet=socket,in,10,127.0.0.1,6400,tcp
 ```
-3. Then running the Simulator.
+3. Then click on the button `Fly` and the simulator will run.
 
-**After running the app:**
+**In Android Studio:**
 
-4. There is two field to fill in the app:
+4. Run the Aplication.
+5. There is two field to fill in the app:
 	- IP Address: when using in emulator then input the local network IP.
 	- Port: input the port that matched to the port that written in Simulator's settings.
-5. Press `CONNECT`.
+6. Click on the button `CONNECT`.
 
-**Now you can start flying the airpalne.**
+**Now you can start flying the aircraft.**
 
 
 ## UML:
@@ -68,5 +71,5 @@ The application developed in Android Studio using Kotlin language.
 * Dov Moshe
 
 ## Downloads:
-•	FlightGear Simulator link: https://www.flightgear.org/
-•	Android Studio link: https://developer.android.com/studio
+- FlightGear Simulator link: https://www.flightgear.org/
+- Android Studio link: https://developer.android.com/studio
