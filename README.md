@@ -51,7 +51,7 @@ After the connection the communications between the simulator and the app is by 
 
 **You can now start flying the aircraft.**
 
-## UML:
+## UML diagram:
 
 ![Untitled Workspace (1)](https://user-images.githubusercontent.com/72437425/123521664-babdd500-d6c0-11eb-9b50-38ad1d7f4e6f.png)
 
