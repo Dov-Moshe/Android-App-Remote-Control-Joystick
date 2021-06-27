@@ -3,7 +3,7 @@
 
 ## About the Android Application:
 
-This application provides a Remote Control Joystick for flying an aircraft in FlightGear Sinmulator. The simulator is the server and the Android app is the client. By IP address and Port, the app connects to the simulator and sends commands for the aircraft's flying.
+This application provides a Remote Control Joystick for flying an aircraft in FlightGear Simulator. The simulator is the server and the Android app is the client. By IP address and Port, the app connects to the simulator and sends commands for the aircraft's flying.
 
 After the connection the communications between the simulator and the app is by a protocol of four commands. The commands are change the value of: Rudder, Throttle, Aileron and Elevator.
 
@@ -43,7 +43,7 @@ After the connection the communications between the simulator and the app is by 
 
 **In Android Studio:**
 3. Clone the project and open it with Android Studio.
-4. Run the Aplication.
+4. Run the Application.
 5. There are two fields you must fill in the app:
 	- IP Address: when using the emulator input the local network IP.
 	- Port: input the port `6400`.
