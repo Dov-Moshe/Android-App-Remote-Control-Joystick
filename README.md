@@ -42,6 +42,7 @@ After the connection the communications between the simulator and the app is by 
 2. Then click the button `Fly` and the simulator will start running.
 
 **In Android Studio:**
+
 3. Clone the project and open it with Android Studio.
 4. Run the Application.
 5. There are two fields you must fill in the app:
